@@ -22,8 +22,10 @@ class ExpressVpnTray:
 
     # Check status.
     self.vpn_status = utils.status()
+    self.has_update = utils.has_update()
     self.is_connected = 'Not connected' not in self.vpn_status
     self.locations = utils.locations()
+    self.locations_all = utils.locations_all()
 
     # Create tray icon.
     self.tray = Gtk.StatusIcon()
@@ -52,6 +54,12 @@ class ExpressVpnTray:
     toggle.show()
     menu.append(toggle)
     toggle.connect('activate', self.toggle)
+    
+    # Update now/Updated
+    update = Gtk.MenuItem('Update now' if self.has_update else 'Latest version')
+    update.show()
+    menu.append(update)
+    update.connect('activate', self.update)
 
     # Smart locations.
     if not self.is_connected:
@@ -66,6 +74,20 @@ class ExpressVpnTray:
       smart.set_submenu(smart_submenu)
       smart.show()
       menu.append(smart)
+    
+    # All locations.
+    if not self.is_connected:
+      all_submenu = Gtk.Menu()
+      for location in self.locations_all:
+        item = Gtk.MenuItem(location.title)
+        item.show()
+        item.connect('activate', self.connect, location.id)
+        all_submenu.append(item)
+      
+      all = Gtk.MenuItem('All locations')
+      all.set_submenu(all_submenu)
+      all.show()
+      menu.append(all)
     
     # Quit
     quit = Gtk.MenuItem('Quit')
@@ -84,6 +106,12 @@ class ExpressVpnTray:
       self.update_icon()
     except:
       logger.write('Failed to connect.\n')
+  
+  def update(self, widget):
+    try:
+      utils.update_now()
+    except:
+      logger.write('Failed to update.\n')
   
   def connect(self, widget, location):
     try:
