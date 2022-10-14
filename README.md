@@ -2,7 +2,7 @@
 
 Tray icon for displaying status of ExpressVPN client/daemon on Linux desktops.
 
-Icons are copied from Mac version of ExpressVPN client.
+Icons are modefied using ExpressVPN log.
 
 ## Requirements
 
@@ -36,13 +36,9 @@ sudo python3 setup.py install
 
 Can be as simple as
 ```
-expressvpn-tray &
+expressvpn_actions_gui &
 ```
 
-But given that StatusIcon is deprecated in Gtk3, it will produce deprecation warnings while it's running. So I recommend to do this instead:
-```
-expressvpn-tray 1>/dev/null 2>&1  &
-```
 
 # Based on
 [ExpresssVPN tray](https://github.com/cog1to/expressvpn-tray)
