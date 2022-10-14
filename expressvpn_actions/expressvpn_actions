@@ -5,12 +5,9 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GObject as gobject
 from gi.repository import GLib as glib
-import os
 import subprocess
 import sys
-import re
-import pkg_resources
-import utils
+import expressvpn_actions_utils as utils
 
 REFRESH_INTERVAL = 5000
 ICONS_DIR='/usr/share/expressvpn-tray'

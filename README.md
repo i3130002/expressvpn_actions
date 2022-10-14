@@ -1,4 +1,4 @@
-# ExpressVPN Tray Icon
+# ExpressVPN Actions
 
 Tray icon for displaying status of ExpressVPN client/daemon on Linux desktops.
 
@@ -43,3 +43,6 @@ But given that StatusIcon is deprecated in Gtk3, it will produce deprecation war
 ```
 expressvpn-tray 1>/dev/null 2>&1  &
 ```
+
+# Based on
+[ExpresssVPN tray](https://github.com/cog1to/expressvpn-tray)
