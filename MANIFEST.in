@@ -1,3 +1,3 @@
-include expressvpn-tray-connected.png
-include expressvpn-tray-not-connected.png
+include src/expressvpn_actions/connected.png
+include src/expressvpn_actions/not-connected.png
 

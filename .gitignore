@@ -5,3 +5,4 @@ expressvpn_tray.egg-info
 __pycache__
 .vscode
 build
+expressvpn_actions.egg-info
