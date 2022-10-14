@@ -1,4 +1,4 @@
-from . import expressvpn_actions
+from expressvpn_actions import expressvpn_actions_gui
 
 
 def run():
@@ -10,8 +10,8 @@ def run():
     sys.stderr = logger
 
     # Instantiate the app.
-    app = expressvpn_actions.ExpressVpnActions(logger)
-    expressvpn_actions.Gtk.main()
+    app = expressvpn_actions_gui.ExpressVpnActions(logger)
+    expressvpn_actions_gui.Gtk.main()
 
 if __name__ == '__main__':
     run()

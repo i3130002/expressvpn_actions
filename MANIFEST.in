@@ -1,3 +1,4 @@
 include src/expressvpn_actions/connected.png
 include src/expressvpn_actions/not-connected.png
+include src/expressvpn_actions/has-update.png
 
