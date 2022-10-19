@@ -57,7 +57,7 @@ class ExpressVpnActions:
 
         # Update now/Updated
         update_item = Gtk.MenuItem(
-            'Update now' if self.has_update else 'Latest version')
+            'Update now' if self.has_update else f'Latest version {self.version}')
         update_item.set_sensitive(self.has_update)
         update_item.show()
         menu.append(update_item)
@@ -128,7 +128,7 @@ class ExpressVpnActions:
             self.logger.write('Failed to connect to ' + location + '.\n')
 
     def update_icon(self):
-        if(self.has_update):
+        if(hasattr(self,"has_update") and self.has_update):
             self.tray.set_from_file(
                 self.ICONS_DIR+'/has-update.png')
         else:
@@ -140,7 +140,6 @@ class ExpressVpnActions:
             # Check status.
             self.vpn_status = self.utils.status()
             self.is_connected = 'Not connected' not in self.vpn_status
-            self.has_update = self.utils.has_update()
 
             # Update tray icon
             self.update_icon()
@@ -152,7 +151,7 @@ class ExpressVpnActions:
             # Schedule next refresh.
             glib.timeout_add(self.STATUS_REFRESH_INTERVAL,
                              self.refresh_status, self.tray)
-        except:
+        except Exception as _:
             self.logger.write('Failed to refresh status\n')
             # self.vpn_status = status
 
@@ -160,6 +159,7 @@ class ExpressVpnActions:
         try:
             # Check status.
             self.has_update = self.utils.has_update()
+            self.version = self.utils.get_version()
 
             # Update tray icon
             self.update_icon()
@@ -167,7 +167,7 @@ class ExpressVpnActions:
             # Schedule next refresh.
             glib.timeout_add(self.UPDATE_REFRESH_INTERVAL,
                              self.refresh_update, self.tray)
-        except:
+        except Exception as _:
             self.logger.write('Failed to refresh update\n')
             # self.vpn_status = status
 

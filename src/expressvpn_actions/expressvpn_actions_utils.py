@@ -40,6 +40,13 @@ def status():
     return vpn_status
 
 
+def get_version():
+    output = os.popen(
+        'expressvpn --version').read().strip()
+    version = re.search(r'expressvpn version (.*) ',output).group(1)
+    return version
+
+
 def has_update():
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
     status_raw = ansi_escape.sub('', os.popen(
