@@ -62,16 +62,12 @@ def update_now():  # Based on https://www.reddit.com/r/Express_VPN/comments/us7j
         cVersion = re.split("expressvpn-(.*?)-", latestVersionURL)[1]
     iVersion = _checkVersion()
     if iVersion < cVersion:
-        p = input('\n There is an update available. Install? [Y/N] > ')
-        if p.lower() == ('y'):
-            print('\n Downloading update ...\n')
-            response = urlopen(latestVersionURL)
-            fN = f"/tmp/expressvpn-{cVersion}.{os.path.splitext(response.url)[1]}"
-            with open(fN, 'b+w') as f:
-                f.write(response.read())
-            os.system(f'sudo {_get_package_manager_install_code()} {fN}')
-        else:
-            quit()
+        print('\n Downloading update ...\n')
+        response = urlopen(latestVersionURL)
+        fN = f"/tmp/expressvpn-{cVersion}.{os.path.splitext(response.url)[1]}"
+        with open(fN, 'b+w') as f:
+            f.write(response.read())
+        os.system(f'sudo {_get_package_manager_install_code()} {fN}')
     else:
         print('\n ExpressVPN is fully updated.\n')
 
